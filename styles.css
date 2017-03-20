@@ -1,0 +1,262 @@
+* {
+    font: Verdana, Arial, 'sans-serif' !important;
+}
+
+nav {
+    display: block;
+    width: 100%;
+
+}
+
+#wirlixpage {
+    background-color: white;
+}
+
+.clock {
+    text-align: left;ß
+
+}
+
+
+
+}
+.navB {
+    width: 66%;
+    display: flex;
+    float: left;
+    text-align: right;
+    position: absolute;
+    padding-right: 0;
+
+}
+
+.textinnavbar {
+
+    float: left;;
+    width: 33%;
+    font-weight: 300;
+    font-size: 15px;
+    font-family: sans-serif;
+    text-align: left;
+
+}
+
+header {
+    text-align: center;
+    font-family: Sans-serif;
+    font-style: normal;
+    color: #e7d0ba;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1.2em;
+    font-weight: 200;
+    text-decoration: none;
+    line-height: 1em;
+
+}
+
+nav {
+    width:100%;
+    margin:0 auto;
+    padding:0;
+    list-style:none;
+    display:inline-block;
+    text-align:center;
+    font-family: sans-serif;
+    font color: white;
+}
+
+.nav a {
+    display: flex;
+    justify-content:space-between;
+    text-align:center;
+    margin:0;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    display:block;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+}
+
+.Home {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 200%;
+    height: 500px;
+
+  }
+
+.Landing {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 200%;
+  height: 400px;
+}
+
+#Featured {
+    text-align: center;
+    font-size: 150%;
+
+}
+
+h4 {
+    padding: 75px;
+}
+
+.image {
+    margin-left: 180px;
+      overflow: hidden;
+      text-align: left;
+      padding-right: "500px";
+  }
+
+.wrap {
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  text-align: center;
+}
+.wrap img {
+  height: 400px;
+  width: 400px;
+  vertical-align: middle;
+}
+
+/*
+.Name1 {
+    float:left;
+    overflow: hidden;
+    padding-left: 200px;
+}
+
+
+}
+
+.Name2 {
+    float: right;
+    overflow: hidden;
+    padding-right: 200px;
+}
+
+#Description1 {
+    float: right;
+    padding-right: 200px;
+}
+
+*/
+
+#left {
+    float:left;
+
+}
+
+.Name1 {
+    display: flex;
+    float: left;
+
+
+}
+#right {
+    float:right;
+
+}
+
+.Name2 {
+    display: flex;
+    float: right;
+
+}
+
+
+input {
+    height: 100px;
+    width: 300px;
+    text-align: center;
+    padding: 500px;
+}
+
+#button {
+    text-align: center;
+}
+
+#About {
+    text-align: center;
+    width: 100%;
+    padding-top: 100px;
+    height: 700px;
+    vertical-align: middle;
+    background-color: turquoise;
+
+}
+#Join {
+    text-align: center;
+    width: 100%;
+
+}
+
+p {
+    padding-right: 100px;
+    padding-left: 100px;
+    font-size: 20px;
+}
+
+h1 {
+
+font-size: 50px;
+
+}
+
+blockquote {
+    font-size: 18px;
+}
+
+h2 {
+    padding-right: 75px;
+    padding-left: 75px;
+    font-weight: lighter;
+}
+
+#JoinButton {
+    padding: 300px;
+    text-align: center;
+
+
+}
+form {
+    text-align: center;
+}
+
+.SparkControversy {
+    text-align: center;
+    vertical-align: middle;
+    height: 400px;
+}
