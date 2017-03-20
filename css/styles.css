@@ -260,3 +260,19 @@ form {
     vertical-align: middle;
     height: 400px;
 }
+
+/* -------------------- Debate Room */
+
+#debateheader {
+    text-align: center;
+}
+
+input {
+
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    height: 6px;
+    width: 300px;
+    text-align: center;
+}
