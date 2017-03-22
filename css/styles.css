@@ -9,7 +9,7 @@ nav {
 }
 
 #wirlixpage {
-    background-color: white;
+    background-color: white;;
 }
 
 .clock {
@@ -27,12 +27,13 @@ nav {
     text-align: right;
     position: absolute;
     padding-right: 0;
+    text color: white;
 
 }
 
 .textinnavbar {
 
-    float: left;;
+    float: left;
     width: 33%;
     font-weight: 300;
     font-size: 15px;
@@ -40,6 +41,24 @@ nav {
     text-align: left;
 
 }
+
+h4 {
+    font-family: Sans-serif;
+    font-style: normal;
+    color: #e7d0ba;
+    margin: 0;
+    line-height: 1.2em;
+    font-weight: 200;
+    text-decoration: none;
+    font-size: 12px;
+    text-align: center;
+    width: 215px;
+
+
+
+}
+
+
 
 header {
     text-align: center;
@@ -59,7 +78,7 @@ header {
 nav {
     width:100%;
     margin:0 auto;
-    padding:0;
+    padding:20px;;
     list-style:none;
     display:inline-block;
     text-align:center;
@@ -108,7 +127,7 @@ li a:hover {
     align-items: center;
     justify-content: center;
     font-size: 200%;
-    height: 500px;
+    height: 100px;
 
   }
 
@@ -118,7 +137,7 @@ li a:hover {
   align-items: center;
   justify-content: center;
   font-size: 200%;
-  height: 400px;
+  height: 200px;
 }
 
 #Featured {
@@ -127,9 +146,7 @@ li a:hover {
 
 }
 
-h4 {
-    padding: 75px;
-}
+
 
 .image {
     margin-left: 180px;
@@ -201,7 +218,8 @@ input {
     height: 100px;
     width: 300px;
     text-align: center;
-    padding: 500px;
+    padding-top: 200px;
+
 }
 
 #button {
@@ -235,10 +253,6 @@ font-size: 50px;
 
 }
 
-blockquote {
-    font-size: 18px;
-}
-
 h2 {
     padding-right: 75px;
     padding-left: 75px;
@@ -246,13 +260,14 @@ h2 {
 }
 
 #JoinButton {
-    padding: 300px;
+    padding: 50px;
     text-align: center;
 
 
 }
 form {
     text-align: center;
+    padding-top: 30px;
 }
 
 .SparkControversy {
@@ -275,4 +290,127 @@ input {
     height: 6px;
     width: 300px;
     text-align: center;
+}
+
+/* --------------------------------- Gallery */
+
+#GalleryHeading {
+    text-align: center;
+    font-weight: 300;
+    font-size: 15px;
+    font-family: sans-serif;
+    color: black;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1.2em;
+    font-weight: 200;
+    font-size:20px;
+
+}
+
+
+.image1 {
+    float: left;
+    margin: 10px;
+    height: 100px;
+    width: 33%
+
+
+}
+
+.image2 {
+    float: left;
+    margin: 10px;
+    height: 100px;
+    width: 33%;
+}
+
+.image3 {
+    float: left;
+    margin: 10px;
+    height: 100px;
+    width: 33%;
+}
+
+img {
+    height: 200px;
+    width: 200px;
+}
+
+#Row1 {
+    display: flex;
+    margin: 10px;
+    align-items: center;
+    text-align: center;
+    height: 225px;
+}
+
+#Row2 {
+    display: flex;
+    margin: 10px;
+    align-items: center;
+    text-align: center;
+    height: 225px;
+}
+
+
+
+/* --------------------------------- Upcoming */
+
+
+#UpcomingHeading {
+    text-align: center;
+    font-weight: 300;
+    font-size: 15px;
+    font-family: sans-serif;
+    color: black;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1.2em;
+    font-weight: 200;
+    font-size:20px;
+
+}
+
+.text {
+    text-align: center;
+    font-weight: 300;
+    font-size: 13px;
+    font-family: sans-serif;
+    color: black;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1.2em;
+    font-weight: 200;
+
+}
+
+.about {
+    text-align: center;
+    font-weight: 300;
+    font-size: 11px;
+    font-family: sans-serif;
+    color: black;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 25px;
+    padding-left: 25px;
+    line-height: 1.2em;
+    font-weight: 200;
+}
+
+blockquote {
+    font-size: 10px;
+}
+
+footer {
+    background-color: black;
+}
+
+.wordbottom {
+    font color: white;
 }
