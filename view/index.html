@@ -4,29 +4,34 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Wirlix Inc</title>
+      <title>Wirlix Debating Platform</title>
       <link rel="stylesheet" type="text/css" href="reset.css" />
       <link rel="stylesheet" type="text/css" href="wirlix.css" />
       <script type="text/javascript" src="wirlix_util.js"></script>
       <script type="text/javascript" src="wirlix_ajax.js"></script>
    </head>
    <body>
-      <nav>
-         <ul>
-            <li><a href="home.html">Home</a></li>
-               <li>
-               <a href="gallery.html">Gallery <span class="caret"></span></a>
-               <div>
-                  <ul>
-                     <li><a href="gallery.html#immigration">Immigration</a></li>
-                     <li><a href="gallery.html#foreignpolicy">Foreign Policy</a></li>
-                     <li><a href="gallery.html#tradepolicy">Trade Policy</a></li>
-                  </ul>
-               </div>
-            </li>
-            <li><a href="upcoming.html">Upcoming</a></li>
-            <li><a href="about.html">About</a></li>
-           </ul>
-       </nav>
+      <!-- 
+===============
+Nav
+===============
+-->
+<nav class="grouping">
+	<figure>
+		<img src="images/wirlix_logo.png" alt="Shark">
+	</figure>
+	<ul class="primary-nav grouping">
+		<li><a href="#">Home</a></li>
+		<li class="has-submenu"><a href="gallery.html">Gallery</a>
+			<ul>
+				<li><a href="">Immigration</a></li>
+				<li><a href="">Foreign Policy</a></li>				
+			</ul>
+		</li>
+		<li><a href="#">Upcoming</a></li>
+		<li><a href="#">About</a></li>
+	</ul>
+</nav>
+
    </body>
 </html>
