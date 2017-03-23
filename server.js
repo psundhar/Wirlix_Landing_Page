@@ -23,6 +23,11 @@ router.get('/', function(req, res) {
     res.sendFile('index.html')
 })
 
+// Index.html
+router.route("/home").get(function(req, res) {
+    res.sendFile('index.html')
+})
+
 // Get All Users
 router.route("/users").get(function(req, res) {
     var response = {};
