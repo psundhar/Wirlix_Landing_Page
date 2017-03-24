@@ -12,46 +12,72 @@
    </head>
    <body>
       <!-- 
-===============
-Nav
-===============
--->
-<nav class="grouping">
-	<figure>
-		<img src="images/wirlix_logo.png" alt="Shark"/>
-	</figure>
-	<ul class="primary-nav grouping">
-       <li><a href="index.html">Home</a></li>
-		<li class="has-submenu"><a href="gallery.html">Gallery</a>
-			<ul>
-				<li><a href="">Immigration</a></li>
-				<li><a href="">Foreign Policy</a></li>				
-			</ul>
-		</li>
-		<li><a href="upcoming.html">Upcoming</a></li>
-		<li><a href="about.html">About</a></li>
-	</ul>
-</nav>
-       
-       <!-- Intro Section -->
-<section class="grouping">
-	<div class="wrapper">
-		<div class="intro-content">
-            
-        </div>
-        <div id="clock" />
-    </div>
-       </section>
-
-<!-- 
-================ 
-Footer
-================
--->	
-<footer>
-	<div class="wrapper grouping">
-
-	</div><!-- end wrapper -->
-</footer>
+         ===============
+         Nav
+         ===============
+         -->
+      <nav class="grouping">
+         <figure>
+            <img src="images/wirlix_logo.png" alt="Shark"/>
+         </figure>
+         <ul class="primary-nav grouping">
+            <li><a href="index.html">Home</a></li>
+            <li class="has-submenu">
+               <a href="gallery.html">Gallery</a>
+               <ul>
+                  <li><a href="">Immigration</a></li>
+                  <li><a href="">Foreign Policy</a></li>
+               </ul>
+            </li>
+            <li><a href="upcoming.html">Upcoming</a></li>
+            <li><a href="about.html">About</a></li>
+         </ul>
+      </nav>
+      <!-- Intro Section -->
+      <section class="grouping">
+         <div class="wrapper">
+         <div class="form-content">
+            <form class="debate_form" action="#" method="post" name="debate_form">
+               <ul>
+                  <li>
+                     <h2>Enter Debate</h2>
+                     <span class="required_notification">* Denotes Required Field</span>
+                  </li>
+                  <li>
+                     <label for="fname">First Name:</label>
+                     <input type="text" name="fname" required/>
+                  </li>
+                  <li>
+                     <label for="lname">Last Name:</label>
+                     <input type="text" name="lname" required/>
+                     <span class="form_hint">Proper format "name@something.com"</span>
+                  </li>
+                  <li>
+                     <label for="email">Email:</label>
+                     <input type="text" name="email" required/>
+                     <span class="form_hint">Proper format "name@something.com"</span>
+                  </li>
+                  <li>
+                     <label for="topic">Topic:</label>
+                     <input type="text" name="topic" required />
+                  </li>
+                  <li>
+                     <button class="submit" type="submit">Submit</button>
+                  </li>
+               </ul>
+            </form>
+         </div>
+        
+      </section>
+      <!-- 
+         ================ 
+         Footer
+         ================
+         -->	
+      <footer>
+         <div class="wrapper grouping">
+         </div>
+         <!-- end wrapper -->
+      </footer>
    </body>
 </html>
