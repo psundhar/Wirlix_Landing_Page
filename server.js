@@ -19,21 +19,21 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Index.html
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
     res.sendFile('index.html')
 })
 
 // Index.html
-router.route("/home").get(function(req, res) {
+router.route("/home").get(function (req, res) {
     res.sendFile('index.html')
 })
 
 // Get All Users
-router.route("/users").get(function(req, res) {
+router.route("/users").get(function (req, res) {
     var response = {};
 
     // Mongo command to fetch all data from collection.
-    mongoOp.find({}, function(err, data) {
+    mongoOp.find({}, function (err, data) {
         if (err) {
             response = {
                 "error": true,
@@ -51,16 +51,16 @@ router.route("/users").get(function(req, res) {
 
 // Get/Update/Delete User by ID
 router.route("/users/:id")
-    .get(function(req, res) {
+    .get(function (req, res) {
 
     })
-    .put(function(req, res) {
+    .put(function (req, res) {
 
     })
-    .delete(function(req, res) {
+    .delete(function (req, res) {
         var response = {};
         // find the data
-        mongoOp.findById(req.params.id, function(err, data) {
+        mongoOp.findById(req.params.id, function (err, data) {
             if (err) {
                 response = {
                     "error": true,
@@ -70,7 +70,7 @@ router.route("/users/:id")
                 // data exists, remove it.
                 mongoOp.remove({
                     _id: req.params.id
-                }, function(err) {
+                }, function (err) {
                     if (err) {
                         response = {
                             "error": true,
