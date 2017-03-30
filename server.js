@@ -23,6 +23,22 @@ router.get('/', function(req, res) {
     res.sendFile('index.html')
 })
 
+//gallery.html
+
+router.get('/gallery', function(req, res) {
+    res.sendFile('gallery.html')
+})
+
+//upcoming.html
+
+router.get('/upcoming', function(req,res) {
+    res.sendFile('upcoming.html')
+})
+
+router.get('/about', function(req, res) {
+    res.sendFile('about.html')
+})
+
 // Get All Users
 router.route("/users").get(function(req, res) {
     var response = {};
