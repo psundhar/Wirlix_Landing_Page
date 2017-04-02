@@ -1,45 +1,128 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <link rel = "stylesheet" type="text/css" href="styles.css" />
-      <script type="text/javascript" src="wirlix_util.js"></script>
-      <script type="text/javascript" src="wirlix_ajax.js"></script>
-   </head>
-   <header>
-      <div id="clockbox" class="clock"></div>
-      <br>
-      <div class = "container">
-         <nav>
-            <div class = "textinnavbar">
-               <h2>WIRLIX</h2>
-                <h4><i>Spark Controversy</i></h4>
+    <head>
+        <link rel = "stylesheet" type="text/css" href="styles.css" />
+        <script type="text/javascript" src="wirlix_util.js"></script>
+        <script type="text/javascript" src="wirlix_ajax.js"></script>
+        <!-- marquee -->
+        <script type="text/javascript" src="crawler.js"></script>
+
+
+
+    </head>
+    <body>
+    <!-- Main Page -->
+    <div id="wirlixpage">
+        <!-- Header Content -->
+        <header>
+            <!-- start marquee -->
+            <div id="maindiv">
+              <div class="marquee" id="mycrawler">
+                AFFIRMATIVE ACTION &nbsp;&nbsp;&nbsp;
+                DRUGS &nbsp;&nbsp;&nbsp;
+                THE EDUCATION SYSTEM &nbsp;&nbsp;&nbsp;
+                SPORTS &nbsp;&nbsp;&nbsp;
+                HOOKUP CULTURE &nbsp;&nbsp;&nbsp;
+                PROTESTS &nbsp;&nbsp;&nbsp;
+                POLITICS &nbsp;&nbsp;&nbsp;
+                RELATIONSHIPS &nbsp;&nbsp;&nbsp;
+                RACE &nbsp;&nbsp;&nbsp;
+                THE ECONOMY &nbsp;&nbsp;&nbsp;
+                PSYCHOLOGY &nbsp;&nbsp;&nbsp;
+                SEX &nbsp;&nbsp;&nbsp;
+                GREEK LIFE &nbsp;&nbsp;&nbsp;
+                ABORTION &nbsp;&nbsp;&nbsp;
+                TECHNOLOGY &nbsp;&nbsp;&nbsp;
+                RELIGION ---- &nbsp;&nbsp;&nbsp;
+
+                </div>
+              <script type="text/javascript">
+              marqueeInit({
+                  uniqueid: 'mycrawler',
+                  style: {
+                      'padding': '5px',
+                      // 'width': 100,
+                      'background': '#E9D699',
+                  'color': 'black',
+                      // 'border': '1px solid #CC3300'
+
+
+                  },
+                  inc: 5, //speed - pixel increment for each iteration of this marquee's movement
+                  mouse: 'cursor driven', //mouseover behavior ('pause' 'cursor driven' or false)
+                  moveatleast: 2,
+                  neutral: 150,
+                  persist: true,
+                  savedirection: true,
+
+              });
+              </script>
             </div>
-            <!-- Next Debate -->
-            <!-- <a href="news.html">News</a>&nbsp;
-               Press, Social Media -->
-               <div class="navB">
-                  <a href="index.html">Home</a>&nbsp;
-                  <a href="gallery.html">Gallery</a>&nbsp;
-                  <a href="upcoming.html">Upcoming</a>&nbsp;
-                  <a href="about.html">About</a>&nbsp;
-               </div>
-         </div>
-         </nav>
-      </header>
-      <div id = "UpcomingHeading">
-           Enter Debate
-    </div>
-   <div id = "form">
-      <form action="/livedebate.html" method="get">
-         <form action="/adminuserinfo" method="post">
-         First Name:
-         <input type="text" name="firstname"><br>
-         Last Name:
-         <input type="text" name="lastname"><br>
-         Email:
-         <input type="text" name="email"><br>
-         Topic:
-         <input type="text" name="topic"><br><br>
-         <input type="submit" value="Submit">
-      </form>
-   </div>
+            <!-- end marquee -->
+            <title>Wirlix</title>
+
+            <div class = "navbar">
+             <div class="navA">
+               <a href="index.html">HOME</a>&nbsp;&nbsp;&nbsp;
+               <a href="gallery.html">GALLERY</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <p href="">SPARK CONTROVERSY</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <a href="upcoming.html">FEATURED</a>&nbsp;&nbsp;&nbsp;
+               <a href="about.html">ABOUT</a>&nbsp;&nbsp;&nbsp;
+
+            </div>
+        </div>
+    </header>
+
+
+
+        <div class = "aboutus">
+            ENTER DEBATE
+       <br>
+   </br>
+    <br />
+</div>
+
+<div id="container">
+
+  <span class="input">
+    <input type="text" class="input__field" id="input-1" />
+    <label for="input-1" class="input__label">
+      <span class="input__label-content">First Name</span>
+  </label>
+  </span>
+
+  <span class="input">
+    <input type="text" class="input__field" id="input-2" />
+    <label for="input-2" class="input__label">
+      <span class="input__label-content">Last Name</span>
+    </label>
+  </span>
+
+  <span class="input">
+    <input type="text" class="input__field" id="input-3" />
+    <label for="input-3" class="input__label">
+      <span class="input__label-content">Phone Number</span>
+    </label>
+  </span>
+
+  <span class="input">
+    <input type="text" class="input__field" id="input-4" />
+    <label for="input-4" class="input__label">
+      <span class="input__label-content">Email Address</span>
+    </label>
+  </span>
+
+  <span class="input message">
+    <textarea class="input__field" id="input-5"></textarea>
+    <label for="input-5" class="input__label">
+      <span class="input__label-content">Topic</span>
+    </label>
+  </span>
+
+  <button id="send-button" type="button">Enter Debate</button>
+
+</div>
+
+</body>
+
+</html>

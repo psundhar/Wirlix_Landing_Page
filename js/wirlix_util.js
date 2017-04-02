@@ -1,35 +1,31 @@
-window.onload = function() {
-    GetClock();
-    setInterval(GetClock, 1000);
-}
+var $input;
 
-function GetClock() {
-    var tmonth = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
-    var d = new Date();
-    var nmonth = d.getMonth(),
-        ndate = d.getDate(),
-        nyear = d.getYear();
-    if (nyear < 1000) nyear += 1900;
+function onInputFocus(event) {
+  var $target = $(event.target);
+  var $parent = $target.parent();
+  $parent.addClass('input--filled');
+};
 
-    var nhour = d.getHours(),
-        nmin = d.getMinutes(),
-        nsec = d.getSeconds(),
-        ap;
+function onInputBlur(event) {
+  var $target = $(event.target);
+  var $parent = $target.parent();
 
-    if (nhour == 0) {
-        ap = " AM";
-        nhour = 12;
-    } else if (nhour < 12) {
-        ap = " AM";
-    } else if (nhour == 12) {
-        ap = " PM";
-    } else if (nhour > 12) {
-        ap = " PM";
-        nhour -= 12;
+  if (event.target.value.trim() === '') {
+    $parent.removeClass('input--filled');
+  }
+};
+
+$(document).ready(function() {
+  $input = $('.input__field');
+
+  // in case there is any value already
+  $input.each(function(){
+    if ($input.val().trim() !== '') {
+      var $parent = $input.parent();
+      $parent.addClass('input--filled');
     }
+  });
 
-    if (nmin <= 9) nmin = "0" + nmin;
-    if (nsec <= 9) nsec = "0" + nsec;
-
-    document.getElementById('clockbox').innerHTML = "" + tmonth[nmonth] + " " + ndate + ", " + nyear + " " + nhour + ":" + nmin + ":" + nsec + ap + "";
-}
+  $input.on('focus', onInputFocus);
+  $input.on('blur', onInputBlur);
+});
