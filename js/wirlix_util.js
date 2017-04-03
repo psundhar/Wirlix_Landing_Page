@@ -30,19 +30,39 @@ $(document).ready(function() {
   $input.on('blur', onInputBlur);
 });
 
-$(document).on('click', '#send-button', function() {
+$(document).on('click', '#register', function() {
 	var firstname = document.getElementById('input-1').value;
 	var lastname = document.getElementById('input-2').value;
 	var phone = document.getElementById('input-3').value;
 	var email = document.getElementById('input-4').value;
-	var topic = document.getElementById('input-5').value;
+	var password = document.getElementById('input-5').value;
 
     var request = new Object();
     request['firstname'] = firstname;
     request['lastname'] = lastname;
     request['phone'] = phone;
     request['email'] = email;
-    request['topic'] = topic;
+    request['password'] = password;
 
-    postUser(JSON.stringify(request));
+    registerUser(JSON.stringify(request));
+});
+
+$(document).on('click', '#login', function() {
+	var email = document.getElementById('input-4').value;
+	var password = document.getElementById('input-5').value;
+
+    var request = new Object();
+    request['topic'] = password;
+
+    loginUser(JSON.stringify(request));
+});
+
+
+$(document).on('click', '#debate', function() {
+	var topic = document.getElementById('input-1').value;
+
+    var request = new Object();
+    request['topic'] = password;
+
+    debate(JSON.stringify(request));
 });
