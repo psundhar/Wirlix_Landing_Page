@@ -32,118 +32,118 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Index.html
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
     res.sendFile('index.html')
 })
 
 //gallery.html
-router.get('/gallery', function(req, res) {
+router.get('/gallery', function (req, res) {
     res.sendFile('gallery.html')
 })
 
 //upcoming.html
-router.get('/upcoming', function(req,res) {
+router.get('/upcoming', function (req, res) {
     res.sendFile('upcoming.html')
 })
 
-router.get('/about', function(req, res) {
+router.get('/about', function (req, res) {
     res.sendFile('about.html')
 })
 
-router.post('/registerUser', function(req, res) {
+router.post('/registerUser', function (req, res) {
     var status = true;
 
     console.log(req.body);
     // Use connect method to connect to the Server
     MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err);
-        status = false;
-      } else {
-        //HURRAY!! We are connected. :)
-        console.log('Connection established to', url);
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            status = false;
+        } else {
+            //HURRAY!! We are connected. :)
+            console.log('Connection established to', url);
 
-        // Get the documents collection
-        var collection = db.collection('user');
-        collection.insertOne(req.body, function (err, result) {
-            if (err) {
-                console.log(err);
-                status = false;
-            } else {
-                console.log('Successfully inserted user!!!');
-                status = true;
-            }
+            // Get the documents collection
+            var collection = db.collection('user');
+            collection.insertOne(req.body, function (err, result) {
+                if (err) {
+                    console.log(err);
+                    status = false;
+                } else {
+                    console.log('Successfully inserted user!!!');
+                    status = true;
+                }
 
-            //Close connection
-            db.close();
-        });
-      }
+                //Close connection
+                db.close();
+            });
+        }
     });
 
     res.send(status);
 })
 
-router.post('/loginUser', function(req, res) {
+router.post('/loginUser', function (req, res) {
     var status = true;
 
     console.log(req.body);
     // Use connect method to connect to the Server
     MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err);
-        status = false;
-      } else {
-        //HURRAY!! We are connected. :)
-        console.log('Connection established to', url);
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            status = false;
+        } else {
+            //HURRAY!! We are connected. :)
+            console.log('Connection established to', url);
 
-        // Get the documents collection
-        var collection = db.collection('user');
-        collection.insertOne(req.body, function (err, result) {
-            if (err) {
-                console.log(err);
-                status = false;
-            } else {
-                console.log('Successfully inserted user!!!');
-                status = true;
-            }
+            // Get the documents collection
+            var collection = db.collection('user');
+            collection.insertOne(req.body, function (err, result) {
+                if (err) {
+                    console.log(err);
+                    status = false;
+                } else {
+                    console.log('Successfully inserted user!!!');
+                    status = true;
+                }
 
-            //Close connection
-            db.close();
-        });
-      }
+                //Close connection
+                db.close();
+            });
+        }
     });
 
     res.send(status);
 })
 
-router.post('/debate', function(req, res) {
+router.post('/debate', function (req, res) {
     var status = true;
 
     console.log(req.body);
     // Use connect method to connect to the Server
     MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err);
-        status = false;
-      } else {
-        //HURRAY!! We are connected. :)
-        console.log('Connection established to', url);
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            status = false;
+        } else {
+            //HURRAY!! We are connected. :)
+            console.log('Connection established to', url);
 
-        // Get the documents collection
-        var collection = db.collection('debate');
-        collection.insertOne(req.body, function (err, result) {
-            if (err) {
-                console.log(err);
-                status = false;
-            } else {
-                console.log('Successfully inserted debate topic!!!');
-                status = true;
-            }
+            // Get the documents collection
+            var collection = db.collection('debate');
+            collection.insertOne(req.body, function (err, result) {
+                if (err) {
+                    console.log(err);
+                    status = false;
+                } else {
+                    console.log('Successfully inserted debate topic!!!');
+                    status = true;
+                }
 
-            //Close connection
-            db.close();
-        });
-      }
+                //Close connection
+                db.close();
+            });
+        }
     });
 
     res.send(status);
