@@ -1,7 +1,20 @@
 var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
-var mongoOp = require("./js/wirlix_mongo");
+
+//lets require/import the mongodb native drivers.
+var mongodb = require('mongodb');
+
+//We need to work with "MongoClient" interface in order to connect to a mongodb server.
+var MongoClient = mongodb.MongoClient;
+
+// Connection URL. This is where your mongodb server is running.
+var url = 'mongodb://localhost:27017/wirlix';
+
+var OpenTok = require('opentok');
+var apiKey = '';
+var apiSecret = '';
+opentok = new OpenTok(apiKey, apiSecret);
 var router = express.Router();
 
 //Store all HTML files in view folder.
@@ -24,13 +37,11 @@ router.get('/', function(req, res) {
 })
 
 //gallery.html
-
 router.get('/gallery', function(req, res) {
     res.sendFile('gallery.html')
 })
 
 //upcoming.html
-
 router.get('/upcoming', function(req,res) {
     res.sendFile('upcoming.html')
 })
@@ -39,65 +50,38 @@ router.get('/about', function(req, res) {
     res.sendFile('about.html')
 })
 
-// Get All Users
-router.route("/users").get(function(req, res) {
-    var response = {};
+router.post('/createUser', function(req, res) {
+    var status = true;
 
-    // Mongo command to fetch all data from collection.
-    mongoOp.find({}, function(err, data) {
-        if (err) {
-            response = {
-                "error": true,
-                "message": "Error fetching data"
-            };
-        } else {
-            response = {
-                "error": false,
-                "message": data
-            };
-        }
-        res.json(response);
-    });
-});
+    console.log(req.body);
+    // Use connect method to connect to the Server
+    MongoClient.connect(url, function (err, db) {
+      if (err) {
+        console.log('Unable to connect to the mongoDB server. Error:', err);
+        status = false;
+      } else {
+        //HURRAY!! We are connected. :)
+        console.log('Connection established to', url);
 
-// Get/Update/Delete User by ID
-router.route("/users/:id")
-    .get(function(req, res) {
-
-    })
-    .put(function(req, res) {
-
-    })
-    .delete(function(req, res) {
-        var response = {};
-        // find the data
-        mongoOp.findById(req.params.id, function(err, data) {
+        // Get the documents collection
+        var collection = db.collection('user');
+        collection.insertOne(req.body, function (err, result) {
             if (err) {
-                response = {
-                    "error": true,
-                    "message": "Error fetching data"
-                };
+                console.log(err);
+                status = false;
             } else {
-                // data exists, remove it.
-                mongoOp.remove({
-                    _id: req.params.id
-                }, function(err) {
-                    if (err) {
-                        response = {
-                            "error": true,
-                            "message": "Error deleting data"
-                        };
-                    } else {
-                        response = {
-                            "error": true,
-                            "message": "Data associated with " + req.params.id + "is deleted"
-                        };
-                    }
-                    res.json(response);
-                });
+                console.log('Successfully inserted user!!!');
+                status = true;
             }
+
+            //Close connection
+            db.close();
         });
-    })
+      }
+    });
+
+    res.send(status);
+})
 
 app.use('/', router);
 

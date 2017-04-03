@@ -11,7 +11,9 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "mongoose": "^4.5.8"
+    "mongodb": "^2.2.25",
+    "mongoose": "^4.5.8",
+    "opentok": "^2.5.0"
   },
   "devDependencies": {},
   "repository": {
