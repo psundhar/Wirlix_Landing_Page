@@ -1,42 +1,51 @@
 var express = require('express');
-var app = express();
-var bodyParser = require("body-parser");
+
+var bodyParser = require('body-parser');
+//opentok library.
 var OpenTok = require('opentok');
+//lets require/import the mongodb native drivers.
+var mongodb = require('mongodb');
 // api key , api secret based on the profle created for testing
 // please create your paid profile and create a project & apiKey , apiSecret
 // with it.
 var apiKey = '45812952'; //'3250192';
 var apiSecret = '076c01947512aa994bdc042816e7a11813c6970a'; //'999f4ae23b820d498150d7ad896df8ed7d3afa66';
-opentok = new OpenTok(apiKey, apiSecret);
-
+var opentok = new OpenTok(apiKey, apiSecret);
 var bodyParser = require("body-parser");
-
-//lets require/import the mongodb native drivers.
-var mongodb = require('mongodb');
-
+var app = express();
 //We need to work with "MongoClient" interface in order to connect to a mongodb server.
 var MongoClient = mongodb.MongoClient;
-
 // Connection URL. This is where your mongodb server is running.
 var url = 'mongodb://localhost:27017/wirlix';
 
-var router = express.Router();
 
+var router = express.Router();
 //Store all HTML files in view folder.
 app.use(express.static(__dirname + '/view'));
-
 //Store all CSS in Scripts folder.
 app.use(express.static(__dirname + '/css'));
-
 //Store all JS in Scripts folder.
 app.use(express.static(__dirname + '/js'));
-
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+app.use('/', router);
+
+
+// Create a session and store it in the express app
+opentok.createSession({
+    mediaMode: 'routed'
+}, function (err, session) {
+    if (err) throw err;
+    app.set('sessionId', session.sessionId);
+    // We will wait on starting the app until this is done
+    startServer();
+});
+
+
 
 // Index.html
 router.get('/', function (req, res) {
@@ -184,33 +193,50 @@ router.post('/debate', function (req, res) {
     });
 })
 
+
+// get default session id
+// http method : post
+// usage http://localhost:3000/getSession
+router.get('/getSession', function (req, res) {
+    console.log(app.get('sessionId'));
+})
+
 // create a session id
 // http method : post
-// usage http://localhost:3000/createSession
-router.post('/createSession', function (req, res) {
-    //console.log(opentok);
-    opentok.createSession(function (err, session) {
-        if (err) {
-            console.log(err);
-            //res.send('Error creating session!!!');
-        } else {
-            // store the session Id in mongo db here or after the api is called.
-            console.log(session.sessionId);
-            res.json({
-                sessionId: session.sessionId
-            });
-        }
+// usage http://localhost:3000/createSession/<debate_id>
+router.get('/createSession/:debate_id', function (req, res) {
+    opentok.createSession({
+        mediaMode: 'routed'
+    }, function (err, session) {
+        if (err) throw err;
+        console.log(req.params.debate_id+'_sessionId');
+        app.set(req.params.debate_id+'_sessionId', session.sessionId);
+        res.json({
+        debate: req.params.debate_id,
+        });
+    });
+
+})
+
+// generating a token 
+// http method : post
+// usgae http://localhost:3000/generateToken/<sessionId>
+router.get('/generateToken', function (req, res) {
+    var token = opentok.generateToken(app.get('sessionId'));
+    console.log(token);
+    res.json({
+        token: token
     });
 })
 
 // generating a token 
 // http method : post
 // usgae http://localhost:3000/generateToken/<sessionId>
-router.post('/generateToken/:sessionId', function (req, res) {
-    console.log(req.params.sessionId);
-    var token = opentok.generateToken(req.params.sessionId);
+router.get('/generateToken/:debate_id', function (req, res) {
+    var token = opentok.generateToken(app.get(req.params.debate_id+'_sessionId'));
     console.log(token);
     res.json({
+        debate:req.params.debate_id,
         token: token
     });
 })
@@ -220,7 +246,7 @@ router.post('/generateToken/:sessionId', function (req, res) {
 // joining a session
 // http method : post
 // usgae http://localhost:3000/generateToken/<sessionId>
-router.get('/connectSession/:sessionId/:token', function (req, res) {
+router.get('/connectSession', function (req, res) {
     console.log(req.params.sessionId);
     console.log(req.params.token);
     var session;
@@ -229,7 +255,7 @@ router.get('/connectSession/:sessionId/:token', function (req, res) {
     var connectionCount = 0;
     var connectionEstablished = false;
     // Replace apiKey and sessionId with your own values:
-    session = OpenTok.initSession(apiKey, sessionId);
+    session = OT.initSession(apiKey, sessionId);
     session.on({
         connectionCreated: function (event) {
             connectionCount++;
@@ -266,6 +292,10 @@ router.get('/connectSession/:sessionId/:token', function (req, res) {
     }));
 })
 
-app.use('/', router);
-app.listen(3000);
-console.log("Running at Port 3000");
+
+function startServer() {
+
+    app.listen(3000);
+    console.log("Running at Port 3000");
+
+}
