@@ -43,7 +43,9 @@ function loginUser(user) {
             if(user != null && user.email.length > 0) {
                 //alert('Successfully authenticated user!!!');
                 $.jStorage.set('user', user);
-                window.open('./debateroom.html', '_self');
+
+                // Get Session ID
+                getSession();
             } else {
                 alert('Error authenticating user. Please try again!!!');
             }
@@ -67,6 +69,25 @@ function debate(user) {
                 alert('TRIGGER ROOM API');
             } else {
                 alert('Error creating debate topic. Please try again!!!');
+            }
+        },
+        error: function (jqXHR, textStatus, err) {
+            alert('Error:' + textStatus + ', err ' + err)
+        }
+    });
+}
+
+function getSession() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/createSession",
+        timeout: 20000,
+        success: function (data) {
+            if(data != null) {
+                alert(data);
+                window.open('./debateroom.html', '_self');
+            } else {
+                alert('Error creating session!!!');
             }
         },
         error: function (jqXHR, textStatus, err) {

@@ -1,15 +1,16 @@
-var express = require('express'),
-    OpenTok = require('opentok');
-
+var express = require('express');
 var app = express();
-var bodyParser = require("body-parser");
+
+var OpenTok = require('opentok');
 
 // api key , api secret based on the profle created for testing
 // please create your paid profile and create a project & apiKey , apiSecret
 // with it.
-var apiKey = '45812802';
-var apiSecret = '6ae1f60a6ccd99465ea86b17b7c45e45e1b96b91';
+var apiKey = '45812802'; //'3250192';
+var apiSecret = '6ae1f60a6ccd99465ea86b17b7c45e45e1b96b91'; //'999f4ae23b820d498150d7ad896df8ed7d3afa66';
 opentok = new OpenTok(apiKey, apiSecret);
+
+var bodyParser = require("body-parser");
 
 //lets require/import the mongodb native drivers.
 var mongodb = require('mongodb');
@@ -182,13 +183,17 @@ router.post('/debate', function(req, res) {
 // create a session id
 // http method : post
 // usage http://localhost:3000/createSession
-router.post('/createSession', function (req, res) {
+router.get('/createSession', function (req, res) {
     //console.log(opentok);
     opentok.createSession(function (err, session) {
-        if (err) throw err;
-        // store the session Id in mongo db here or after the api is called.
-        console.log(session.sessionId);
-        res.send(session.sessionId);
+        if (err) {
+            console.log(err);
+            //res.send('Error creating session!!!');
+        } else {
+            // store the session Id in mongo db here or after the api is called.
+            console.log(session.sessionId);
+            res.send(session.sessionId);
+        }
     });
 })
 

@@ -963,7 +963,6 @@ body {
     height: 100%;
 }
 #container {
-<<<<<<< HEAD
   position: absolute;
   width: 710px;
   height: 5em;
@@ -976,20 +975,6 @@ body {
   justify-content: center;
   align-content: center;
   padding-top: 200px;
-=======
-    position: absolute;
-    width: 710px;
-    height: 5em;
-    left: 50%;
-    top: 50%;
-    margin-left: -355px;
-    margin-top: -2.5em;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    padding-top: 150px;
->>>>>>> b7019bb003b6e95e873d4d7a34d0b5a35fec9e51
 }
 .input {
     position: relative;
