@@ -1,29 +1,22 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 
-<head>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link href="jquery.mobile.custom.structure.min.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-    <script type="text/javascript" src="jstorage.js"></script>
-    <script type="text/javascript" src="wirlix_util.js"></script>
-    <script type="text/javascript" src="wirlix_ajax.js"></script>
-    <!-- marquee -->
-    <script type="text/javascript" src="crawler.js"></script>
-</head>
-
 <body>
-    <!-- Main Page -->
-    <div id="wirlixpage">
-        <!-- Header Content -->
-        <header>
-            <!-- start marquee -->
-            <div id="maindiv">
-                
-            </div>
-        </header> 
-    </div>       
+    <script src="https://static.opentok.com/v2/js/opentok.js" charset="utf-8"></script>
+    <script charset="utf-8">
+        var apiKey = '45812802';
+        var sessionId = '2_MX40NTgxMjgwMn5-MTQ5MTI4MzIxMTExN35JUnVJeDczYUFQS1FYamhkQTlmRnpYVU9-UH4';
+        var token = 'T1==cGFydG5lcl9pZD00NTgxMjgwMiZzaWc9YmZiNmY2ZmUwYmI5Y2RiZTU4ZGEwYjE5MjE2YTEwYmY1OGJmMjhhODpzZXNzaW9uX2lkPTJfTVg0ME5UZ3hNamd3TW41LU1UUTVNVEk0TXpJeE1URXhOMzVKVW5WSmVEY3pZVUZRUzFGWWFtaGtRVGxtUm5wWVZVOS1VSDQmY3JlYXRlX3RpbWU9MTQ5MTI4MzIyNSZub25jZT0wLjc4NjM4ODUwMzU3MDU4NDcmcm9sZT1wdWJsaXNoZXImZXhwaXJlX3RpbWU9MTQ5MTM2OTYyNQ==';
+        var session = OT.initSession(apiKey, sessionId)
+            .on('streamCreated', function(event) {
+                session.subscribe(event.stream);
+            })
+            .connect(token, function(error) {
+                var publisher = OT.initPublisher();
+                session.publish(publisher);
+            });
+
+    </script>
 </body>
 
 </html>

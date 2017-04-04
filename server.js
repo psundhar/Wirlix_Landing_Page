@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var bodyParser = require("body-parser");
 var OpenTok = require('opentok');
-
 // api key , api secret based on the profle created for testing
 // please create your paid profile and create a project & apiKey , apiSecret
 // with it.
@@ -216,6 +215,57 @@ router.post('/generateToken/:sessionId', function (req, res) {
     res.json({
         token: token
     });
+})
+
+
+// joining a debate
+// joining a session
+// http method : post
+// usgae http://localhost:3000/generateToken/<sessionId>
+router.get('/connectSession/:sessionId/:token', function (req, res) {
+    console.log(req.params.sessionId);
+    console.log(req.params.token);
+    var session;
+    var sessionId = req.params.sessionId;
+    var token = req.params.token;
+    var connectionCount = 0;
+    var connectionEstablished = false;
+    // Replace apiKey and sessionId with your own values:
+    session = OpenTok.initSession(apiKey, sessionId);
+    session.on({
+        connectionCreated: function (event) {
+            connectionCount++;
+            console.log(connectionCount + ' connections.');
+        },
+        connectionDestroyed: function (event) {
+            connectionCount--;
+            console.log(connectionCount + ' connections.');
+        },
+        sessionDisconnected: function sessionDisconnectHandler(event) {
+            // The event is defined by the SessionDisconnectEvent class
+            console.log('Disconnected from the session.');
+            document.getElementById('disconnectBtn').style.display = 'none';
+            if (event.reason == 'networkDisconnected') {
+                alert('Your network connection terminated.')
+            }
+        }
+    });
+    // Replace token with your own value:
+    session.connect(token, function (error) {
+        if (error) {
+            console.log('Unable to connect: ', error.message);
+        } else {
+            document.getElementById('disconnectBtn').style.display = 'block';
+            console.log('Connected to the session.');
+            connectionCount = 1;
+            connectionEstablished = true;
+        }
+    });
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({
+        connectionCount: connectionCount,
+        connectionEstablished: connectionEstablished
+    }));
 })
 
 app.use('/', router);
