@@ -52,9 +52,21 @@ router.get('/', function (req, res) {
     res.sendFile('index.html')
 })
 
-//tokbox.html
+// Index.html
 router.get('/tokbox', function (req, res) {
-    res.sendFile(__dirname + '/view/tokbox.html')
+    res.sendFile(__dirname+'/view/tokbox.html')
+})
+
+//tokbox.html
+router.get('/wirlix', function (req, res) {
+    var sessionId = app.get('sessionId'),
+        // generate a fresh token for this client
+    token = opentok.generateToken(sessionId);
+    res.render('wirlix.html', {
+        apiKey: apiKey,
+        sessionId: sessionId,
+        token: token
+    })
 })
 
 
@@ -209,10 +221,10 @@ router.get('/createSession/:debate_id', function (req, res) {
         mediaMode: 'routed'
     }, function (err, session) {
         if (err) throw err;
-        console.log(req.params.debate_id+'_sessionId');
-        app.set(req.params.debate_id+'_sessionId', session.sessionId);
+        console.log(req.params.debate_id + '_sessionId');
+        app.set(req.params.debate_id + '_sessionId', session.sessionId);
         res.json({
-        debate: req.params.debate_id,
+            debate: req.params.debate_id,
         });
     });
 
@@ -233,10 +245,10 @@ router.get('/generateToken', function (req, res) {
 // http method : post
 // usgae http://localhost:3000/generateToken/<sessionId>
 router.get('/generateToken/:debate_id', function (req, res) {
-    var token = opentok.generateToken(app.get(req.params.debate_id+'_sessionId'));
+    var token = opentok.generateToken(app.get(req.params.debate_id + '_sessionId'));
     console.log(token);
     res.json({
-        debate:req.params.debate_id,
+        debate: req.params.debate_id,
         token: token
     });
 })
