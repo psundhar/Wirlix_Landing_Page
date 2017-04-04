@@ -1,6 +1,15 @@
-var express = require('express');
+var express = require('express'),
+    OpenTok = require('opentok');
+
 var app = express();
 var bodyParser = require("body-parser");
+
+// api key , api secret based on the profle created for testing
+// please create your paid profile and create a project & apiKey , apiSecret
+// with it.
+var apiKey = '45812802';
+var apiSecret = '6ae1f60a6ccd99465ea86b17b7c45e45e1b96b91';
+opentok = new OpenTok(apiKey, apiSecret);
 
 //lets require/import the mongodb native drivers.
 var mongodb = require('mongodb');
@@ -11,10 +20,6 @@ var MongoClient = mongodb.MongoClient;
 // Connection URL. This is where your mongodb server is running.
 var url = 'mongodb://localhost:27017/wirlix';
 
-var OpenTok = require('opentok');
-var apiKey = '';
-var apiSecret = '';
-opentok = new OpenTok(apiKey, apiSecret);
 var router = express.Router();
 
 //Store all HTML files in view folder.
@@ -35,6 +40,12 @@ app.use(bodyParser.urlencoded({
 router.get('/', function (req, res) {
     res.sendFile('index.html')
 })
+
+//tokbox.html
+router.get('/tokbox', function (req, res) {
+    res.sendFile(__dirname + '/view/tokbox.html')
+})
+
 
 //gallery.html
 router.get('/gallery', function (req, res) {
@@ -166,6 +177,29 @@ router.post('/debate', function(req, res) {
             });
         }
     });
+})
+
+// create a session id
+// http method : post
+// usage http://localhost:3000/createSession
+router.post('/createSession', function (req, res) {
+    //console.log(opentok);
+    opentok.createSession(function (err, session) {
+        if (err) throw err;
+        // store the session Id in mongo db here or after the api is called.
+        console.log(session.sessionId);
+        res.send(session.sessionId);
+    });
+})
+
+// generating a token 
+// http method : post
+// usgae http://localhost:3000/generateToken/<sessionId>
+router.post('/generateToken/:sessionId', function (req, res) {
+    console.log(req.params.sessionId);
+    var token = opentok.generateToken(req.params.sessionId);
+    console.log(token);
+    res.send(token);
 })
 
 app.use('/', router);
