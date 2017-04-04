@@ -10,8 +10,6 @@ var apiKey = '45812952'; //'3250192';
 var apiSecret = '076c01947512aa994bdc042816e7a11813c6970a'; //'999f4ae23b820d498150d7ad896df8ed7d3afa66';
 opentok = new OpenTok(apiKey, apiSecret);
 
-
-
 var bodyParser = require("body-parser");
 
 //lets require/import the mongodb native drivers.
@@ -209,7 +207,7 @@ router.post('/createSession', function (req, res) {
 // generating a token 
 // http method : post
 // usgae http://localhost:3000/generateToken/<sessionId>
-router.get('/generateToken/:sessionId', function (req, res) {
+router.post('/generateToken/:sessionId', function (req, res) {
     console.log(req.params.sessionId);
     var token = opentok.generateToken(req.params.sessionId);
     console.log(token);
