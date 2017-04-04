@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-
+var bodyParser = require("body-parser");
 var OpenTok = require('opentok');
 
 // api key , api secret based on the profle created for testing
@@ -9,6 +9,8 @@ var OpenTok = require('opentok');
 var apiKey = '45812952'; //'3250192';
 var apiSecret = '076c01947512aa994bdc042816e7a11813c6970a'; //'999f4ae23b820d498150d7ad896df8ed7d3afa66';
 opentok = new OpenTok(apiKey, apiSecret);
+
+
 
 var bodyParser = require("body-parser");
 
@@ -32,10 +34,12 @@ app.use(express.static(__dirname + '/css'));
 //Store all JS in Scripts folder.
 app.use(express.static(__dirname + '/js'));
 
-app.use(bodyParser.json());
+// configure app to use bodyParser()
+// this will let us get the data from a POST
 app.use(bodyParser.urlencoded({
-    "extended": false
+    extended: true
 }));
+app.use(bodyParser.json());
 
 // Index.html
 router.get('/', function (req, res) {
@@ -99,7 +103,7 @@ router.post('/registerUser', function (req, res) {
     });
 })
 
-router.post('/loginUser', function(req, res) {
+router.post('/loginUser', function (req, res) {
     console.log(req.body);
     // Use connect method to connect to the Server
     MongoClient.connect(url, function (err, db) {
@@ -119,12 +123,15 @@ router.post('/loginUser', function(req, res) {
 
             // Get the documents collection
             var collection = db.collection('user');
-            collection.findOne({'email':doc.email, 'password':doc.password}, function(err, document) {
+            collection.findOne({
+                'email': doc.email,
+                'password': doc.password
+            }, function (err, document) {
                 var status = '';
                 if (err) {
                     status = 'ERROR';
                 } else {
-                    if(document != null) {
+                    if (document != null) {
                         console.log(document.firstname);
                         var status = new Object();
                         status['firstname'] = document.firstname;
@@ -144,7 +151,7 @@ router.post('/loginUser', function(req, res) {
     });
 })
 
-router.post('/debate', function(req, res) {
+router.post('/debate', function (req, res) {
     console.log(req.body);
     // Use connect method to connect to the Server
     MongoClient.connect(url, function (err, db) {
@@ -183,7 +190,7 @@ router.post('/debate', function(req, res) {
 // create a session id
 // http method : post
 // usage http://localhost:3000/createSession
-router.get('/createSession', function (req, res) {
+router.post('/createSession', function (req, res) {
     //console.log(opentok);
     opentok.createSession(function (err, session) {
         if (err) {
@@ -192,7 +199,9 @@ router.get('/createSession', function (req, res) {
         } else {
             // store the session Id in mongo db here or after the api is called.
             console.log(session.sessionId);
-            res.send(session.sessionId);
+            res.json({
+                sessionId: session.sessionId
+            });
         }
     });
 })
@@ -204,7 +213,9 @@ router.get('/generateToken/:sessionId', function (req, res) {
     console.log(req.params.sessionId);
     var token = opentok.generateToken(req.params.sessionId);
     console.log(token);
-    res.send(token);
+    res.json({
+        token: token
+    });
 })
 
 app.use('/', router);
