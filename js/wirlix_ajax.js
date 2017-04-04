@@ -13,6 +13,7 @@ function registerUser(user) {
         type: "POST",
         url: "http://localhost:3000/registerUser",
         timeout: 20000,
+        contentType: "application/json; charset=utf-8",
         data: user,
         success: function(data) {
             //show content
@@ -34,11 +35,15 @@ function loginUser(user) {
         type: "POST",
         url: "http://localhost:3000/loginUser",
         timeout: 20000,
+        contentType: "application/json; charset=utf-8",
         data: user,
         success: function(data) {
+            var user = JSON.parse(data);
             //show content
-            if(data) {
-                alert('Successfully authenticated user!!!');
+            if(user != null && user.email.length > 0) {
+                //alert('Successfully authenticated user!!!');
+                $.jStorage.set('user', user);
+                window.open('./debateroom.html', '_self');
             } else {
                 alert('Error authenticating user. Please try again!!!');
             }
@@ -55,11 +60,12 @@ function debate(user) {
         type: "POST",
         url: "http://localhost:3000/debate",
         timeout: 20000,
+        contentType: "application/json; charset=utf-8",
         data: user,
         success: function(data) {
             //show content
-            if(data) {
-                alert('Successfully created debate topic!!!');
+            if(data != null && data == 'SUCCESS') {
+                alert('TRIGGER ROOM API');
             } else {
                 alert('Error creating debate topic. Please try again!!!');
             }

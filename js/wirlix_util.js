@@ -48,21 +48,45 @@ $(document).on('click', '#register', function() {
 });
 
 $(document).on('click', '#login', function() {
-	var email = document.getElementById('input-4').value;
-	var password = document.getElementById('input-5').value;
+	var email = document.getElementById('input-1').value;
+	var password = document.getElementById('input-2').value;
 
     var request = new Object();
-    request['topic'] = password;
+    request['email'] = email;
+    request['password'] = password;
 
     loginUser(JSON.stringify(request));
 });
 
 
 $(document).on('click', '#debate', function() {
+    /*
 	var topic = document.getElementById('input-1').value;
 
     var request = new Object();
-    request['topic'] = password;
+    request['topic'] = topic;
 
     debate(JSON.stringify(request));
+    */
+    $.jStorage.deleteKey('user');
+    var user = $.jStorage.get('user');
+    if(user == null) {
+        window.open('./login.html', '_self');
+    } else {
+        window.open('./debateroom.html', '_self');
+    }
+});
+
+$(document).on('click', '#room', function() {
+	var topic = document.getElementById('input-1').value;
+    var user = $.jStorage.get('user');
+    var request = new Object();
+    request['email'] = user.email;
+    request['topic'] = topic;
+
+    debate(JSON.stringify(request));
+});
+
+$(document).on('logout', '#room', function() {
+    $.jStorage.deleteKey('user');
 });

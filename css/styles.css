@@ -283,7 +283,8 @@ font-style: lighter;
     font-weight: lighter;
     vertical-align: center;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     color: #fff;
     font-size: 50px;
     -ms-word-wrap: normal;
@@ -1094,7 +1095,7 @@ html, body {
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  padding-top: 150px;
+  padding-top: 200px;
 }
 
 .input {

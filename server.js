@@ -64,8 +64,9 @@ router.post('/registerUser', function(req, res) {
         console.log('Connection established to', url);
 
         // Get the documents collection
+        var doc = req.body;
         var collection = db.collection('user');
-        collection.insertOne(req.body, function (err, result) {
+        collection.insertOne(doc, function (err, result) {
             if (err) {
                 console.log(err);
                 status = false;
@@ -73,10 +74,10 @@ router.post('/registerUser', function(req, res) {
                 console.log('Successfully inserted user!!!');
                 status = true;
             }
-
-            //Close connection
-            db.close();
         });
+
+        //Close connection
+        db.close();
       }
     });
 
@@ -84,72 +85,88 @@ router.post('/registerUser', function(req, res) {
 })
 
 router.post('/loginUser', function(req, res) {
-    var status = true;
-
     console.log(req.body);
     // Use connect method to connect to the Server
     MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err);
-        status = false;
-      } else {
-        //HURRAY!! We are connected. :)
-        console.log('Connection established to', url);
-
-        // Get the documents collection
-        var collection = db.collection('user');
-        collection.insertOne(req.body, function (err, result) {
-            if (err) {
-                console.log(err);
-                status = false;
-            } else {
-                console.log('Successfully inserted user!!!');
-                status = true;
-            }
+        var status = '';
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            status = 'ERROR';
 
             //Close connection
             db.close();
-        });
-      }
-    });
+            console.log(status);
+            res.send(status);
+        } else {
+            //HURRAY!! We are connected. :)
+            console.log('Connection established to', url);
+            var doc = req.body;
+            console.log(doc.password);
 
-    res.send(status);
+            // Get the documents collection
+            var collection = db.collection('user');
+            collection.findOne({'email':doc.email, 'password':doc.password}, function(err, document) {
+                var status = '';
+                if (err) {
+                    status = 'ERROR';
+                } else {
+                    if(document != null) {
+                        console.log(document.firstname);
+                        var status = new Object();
+                        status['firstname'] = document.firstname;
+                        status['email'] = document.email;
+                        status = JSON.stringify(status);
+                    } else {
+                        status = 'ERROR';
+                    }
+                }
+
+                //Close connection
+                db.close();
+                console.log(status);
+                res.send(status);
+            });
+        }
+    });
 })
 
 router.post('/debate', function(req, res) {
-    var status = true;
-
     console.log(req.body);
     // Use connect method to connect to the Server
     MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err);
-        status = false;
-      } else {
-        //HURRAY!! We are connected. :)
-        console.log('Connection established to', url);
-
-        // Get the documents collection
-        var collection = db.collection('debate');
-        collection.insertOne(req.body, function (err, result) {
-            if (err) {
-                console.log(err);
-                status = false;
-            } else {
-                console.log('Successfully inserted debate topic!!!');
-                status = true;
-            }
+        var status = '';
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            status = 'ERROR';
 
             //Close connection
             db.close();
-        });
-      }
-    });
+            res.send(status);
+        } else {
+            //HURRAY!! We are connected. :)
+            console.log('Connection established to', url);
+            var doc = req.body;
 
-    res.send(status);
+            // Get the documents collection
+            var collection = db.collection('debate');
+            collection.insertOne(doc, function (err, result) {
+                var status = '';
+                if (err) {
+                    console.log(err);
+                    status = 'ERROR';
+                } else {
+                    console.log('Successfully inserted debate topic!!!');
+                    status = 'SUCCESS';
+                }
+
+                //Close connection
+                db.close();
+                res.send(status);
+            });
+        }
+    });
 })
 
 app.use('/', router);
-
 app.listen(3000);
 console.log("Running at Port 3000");
