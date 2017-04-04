@@ -32,56 +32,59 @@ app.use(bodyParser.urlencoded({
 }));
 
 // Index.html
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
     res.sendFile('index.html')
 })
 
 //gallery.html
-router.get('/gallery', function(req, res) {
+router.get('/gallery', function (req, res) {
     res.sendFile('gallery.html')
 })
 
 //upcoming.html
-router.get('/upcoming', function(req,res) {
+router.get('/upcoming', function (req, res) {
     res.sendFile('upcoming.html')
 })
 
-router.get('/about', function(req, res) {
+router.get('/about', function (req, res) {
     res.sendFile('about.html')
 })
 
-router.post('/registerUser', function(req, res) {
-    var status = true;
-
+router.post('/registerUser', function (req, res) {
     console.log(req.body);
     // Use connect method to connect to the Server
     MongoClient.connect(url, function (err, db) {
-      if (err) {
-        console.log('Unable to connect to the mongoDB server. Error:', err);
-        status = false;
-      } else {
-        //HURRAY!! We are connected. :)
-        console.log('Connection established to', url);
+        var status = true;
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+            status = false;
 
-        // Get the documents collection
-        var doc = req.body;
-        var collection = db.collection('user');
-        collection.insertOne(doc, function (err, result) {
-            if (err) {
-                console.log(err);
-                status = false;
-            } else {
-                console.log('Successfully inserted user!!!');
-                status = true;
-            }
-        });
+            //Close connection
+            db.close();
+            res.send(status);
+        } else {
+            console.log('Connection established to', url);
 
-        //Close connection
-        db.close();
-      }
+            // Get the documents collection
+            var doc = req.body;
+            var collection = db.collection('user');
+            collection.insertOne(doc, function (err, result) {
+                var status = '';
+
+                if (err) {
+                    console.log(err);
+                    status = false;
+                } else {
+                    console.log('Successfully inserted user!!!');
+                    status = true;
+                }
+
+                //Close connection
+                db.close();
+                res.send(status);
+            });
+        }
     });
-
-    res.send(status);
 })
 
 router.post('/loginUser', function(req, res) {
@@ -98,7 +101,6 @@ router.post('/loginUser', function(req, res) {
             console.log(status);
             res.send(status);
         } else {
-            //HURRAY!! We are connected. :)
             console.log('Connection established to', url);
             var doc = req.body;
             console.log(doc.password);
@@ -143,7 +145,6 @@ router.post('/debate', function(req, res) {
             db.close();
             res.send(status);
         } else {
-            //HURRAY!! We are connected. :)
             console.log('Connection established to', url);
             var doc = req.body;
 
@@ -157,11 +158,11 @@ router.post('/debate', function(req, res) {
                 } else {
                     console.log('Successfully inserted debate topic!!!');
                     status = 'SUCCESS';
-                }
 
-                //Close connection
-                db.close();
-                res.send(status);
+                    //Close connection
+                    db.close();
+                    res.send(status);
+                }
             });
         }
     });

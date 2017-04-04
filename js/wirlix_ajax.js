@@ -2,7 +2,7 @@ function update() {
     $.ajax({
         type: 'get',
         url: '/localhost/users/:id',
-        success: function(data) {
+        success: function (data) {
             // use data
         }
     });
@@ -15,17 +15,17 @@ function registerUser(user) {
         timeout: 20000,
         contentType: "application/json; charset=utf-8",
         data: user,
-        success: function(data) {
+        success: function (data) {
             //show content
-            if(data) {
+            if (data) {
                 alert('Successfully created user!!!');
             } else {
                 alert('Error creating user. Please try again!!!');
             }
         },
-        error: function(jqXHR, textStatus, err) {
+        error: function (jqXHR, textStatus, err) {
             //show error message
-            alert('Error:'+textStatus+', err '+err)
+            alert('Error:' + textStatus + ', err ' + err)
         }
     });
 }
@@ -48,9 +48,9 @@ function loginUser(user) {
                 alert('Error authenticating user. Please try again!!!');
             }
         },
-        error: function(jqXHR, textStatus, err) {
+        error: function (jqXHR, textStatus, err) {
             //show error message
-            alert('Error:'+textStatus+', err '+err)
+            alert('Error:' + textStatus + ', err ' + err)
         }
     });
 }
@@ -62,17 +62,15 @@ function debate(user) {
         timeout: 20000,
         contentType: "application/json; charset=utf-8",
         data: user,
-        success: function(data) {
-            //show content
+        success: function (data) {
             if(data != null && data == 'SUCCESS') {
                 alert('TRIGGER ROOM API');
             } else {
                 alert('Error creating debate topic. Please try again!!!');
             }
         },
-        error: function(jqXHR, textStatus, err) {
-            //show error message
-            alert('Error:'+textStatus+', err '+err)
+        error: function (jqXHR, textStatus, err) {
+            alert('Error:' + textStatus + ', err ' + err)
         }
     });
 }
