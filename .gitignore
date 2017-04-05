@@ -2,3 +2,5 @@
 node_modules/
 # DS Store
 .DS_Store
+# IDE Config File
+Wirlix_Landing_Page.iml
